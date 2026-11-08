@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndieVerse - Geliştirici Paneli</title>
+  <link rel="stylesheet" href="css/stil.css">
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="img/ikon-192.png">
+  <link rel="apple-touch-icon" href="img/ikon-180.png">
+  <meta name="theme-color" content="#050b24">
+  <meta name="description" content="IndieVerse: bağımsız oyunları keşfet, puanla, topluluğa katıl ve ejderhaya dönüş.">
+</head>
+<body>
+
+  <header>
+    <h1>IndieVerse</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="oyuncu.html">Oyun Keşfet</a></li>
+        <li><a href="gelistirici.html" class="aktif">Geliştirici Paneli</a></li>
+        <li><a href="ag.html">Geliştirici Ağı</a></li>
+        <li><a href="topluluk.html">Topluluk</a></li>
+        <li><a href="uye.html">Üye Ol</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="banner uzun">
+      <img src="img/dragon.png" alt="Mavi ejderha" class="ust-hizala">
+      <div class="banner-yazi">
+        <h2>Geliştirici Paneli</h2>
+        <p>Oyununu yükle, demo paylaş, oyunculardan puan ve geri bildirim topla.</p>
+      </div>
+    </div>
+
+    <section id="gelistirici-basvuru">
+      <h2>Bağımsız Oyununu IndieVerse'e Ekle</h2>
+      <p>Proje detaylarını gönder; oyun anında oyuncuların keşfet sayfasında görünsün.</p>
+
+      <form id="oyunEkleFormu" action="#" method="get">
+        <div class="form-izgara">
+          <p>
+            <label for="studyoAdi">Geliştirici veya Stüdyo Adı:</label><br>
+            <input type="text" id="studyoAdi" name="studyoAdi" placeholder="Örn: Nova Indie Studio" required>
+          </p>
+          <p>
+            <label for="oyunAdi">Oyunun Adı:</label><br>
+            <input type="text" id="oyunAdi" name="oyunAdi" placeholder="Örn: Karanlık Orman" required>
+          </p>
+          <p>
+            <label for="oyunTuru">Oyunun Ana Türü:</label><br>
+            <select id="oyunTuru" name="oyunTuru">
+              <option value="korku">Korku / Gerilim</option>
+              <option value="rpg">Rol Yapma (RPG)</option>
+              <option value="platform">2D / 3D Platform</option>
+              <option value="bulmaca">Bulmaca / Macera</option>
+              <option value="strateji">Strateji / Kart Oyunu</option>
+              <option value="hayatta-kalma">Hayatta Kalma</option>
+            </select>
+          </p>
+          <p>
+            <label for="atmosfer">Atmosfer / Sanat Tarzı:</label><br>
+            <select id="atmosfer" name="atmosfer">
+              <option value="psikolojik">Karanlık / Psikolojik</option>
+              <option value="piksel">Retro / Piksel</option>
+              <option value="rahat">Sakin / Cozy</option>
+              <option value="hepsi">Karma</option>
+            </select>
+          </p>
+        </div>
+
+        <p>
+          Platform:<br>
+          <input type="checkbox" id="pPc" name="platform" value="pc" checked><label for="pPc">PC</label>
+          <input type="checkbox" id="pKonsol" name="platform" value="konsol"><label for="pKonsol">Konsol</label>
+          <input type="checkbox" id="pMobil" name="platform" value="mobil"><label for="pMobil">Mobil</label>
+        </p>
+
+        <p>
+          Projenin Güncel Aşaması:<br>
+          <input type="radio" id="asamaDemo" name="asama" value="demo" checked><label for="asamaDemo">Oynanabilir Demo Hazır</label>
+          <input type="radio" id="asamaGelistirme" name="asama" value="gelistirme"><label for="asamaGelistirme">Geliştirme / Alfa</label>
+          <input type="radio" id="asamaTam" name="asama" value="tam"><label for="asamaTam">Tam Sürüm</label>
+        </p>
+
+        <p>
+          <label for="anahtarKelimeler">Anahtar Kelimeler (virgülle ayır):</label><br>
+          <input type="text" id="anahtarKelimeler" name="anahtarKelimeler" placeholder="prenses, saray, korku, lanet, bulmaca" required>
+        </p>
+
+        <p>
+          <label for="oyunAmaci">Oyunun Amacı (neyi hedefliyor?):</label><br>
+          <input type="text" id="oyunAmaci" name="oyunAmaci" placeholder="Örn: Klasik masalı korku hikâyesine çevirmek" required>
+        </p>
+
+        <p>
+          <label for="oyunAciklama">Oyunun Konusu ve Özgün Mekanikler:</label><br>
+          <textarea id="oyunAciklama" name="oyunAciklama" rows="4" placeholder="Hikâyeyi ve mekanikleri kısaca anlat..." required></textarea>
+        </p>
+
+        <p>
+          <label for="demoLink">Demo Bağlantısı (itch.io, Steam, Drive...):</label><br>
+          <input type="url" id="demoLink" name="demoLink" placeholder="https://...">
+        </p>
+
+        <p>
+          <input type="checkbox" id="betaTest" name="betaTest" checked>
+          <label for="betaTest">Oyuncuların oyunumu test edip geri bildirim göndermesini istiyorum</label>
+        </p>
+
+        <button type="submit">🚀 Projeyi Vitrinde Yayınla</button>
+        <p id="basariMesaji" hidden style="margin-top:14px;color:#7dffb0;">✅ Oyunun yayınlandı! "Oyun Keşfet" sayfasında görünür.</p>
+      </form>
+    </section>
+
+    <section id="projelerim-alani">
+      <h2>Projelerim</h2>
+      <p>Aldığın puanları ve oyuncu geri bildirimlerini buradan takip et.</p>
+      <div id="projelerim" class="oyun-izgara"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-izgara">
+      <div>
+        <b class="footer-marka">IndieVerse</b>
+        <p>Bağımsız oyunların keşfedildiği, puanlandığı ve birlikte büyütüldüğü topluluk.</p>
+      </div>
+      <div>
+        <b>Keşfet</b>
+        <a href="oyuncu.html">Oyun Keşfet</a>
+        <a href="topluluk.html">Topluluk</a>
+        <a href="index.html#yolculuk">Evrim Yolculuğu</a>
+      </div>
+      <div>
+        <b>Geliştiriciler</b>
+        <a href="gelistirici.html">Geliştirici Paneli</a>
+        <a href="ag.html">Geliştirici Ağı</a>
+        <a href="uye.html">Üye Ol</a>
+      </div>
+    </div>
+    <p class="footer-alt">&copy; 2026 IndieVerse &middot; Ağ Tabanlı Programlama Projesi &middot; Yeterince hızlı yüzersen ejderhaya dönüşürsün 🐉</p>
+  </footer>
+
+  <script src="js/ortak.js"></script>
+  <script src="js/gelistirici.js"></script>
+  <script src="js/efekt.js"></script>
+</body>
+</html>

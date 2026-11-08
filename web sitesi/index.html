@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndieVerse - Bağımsız Oyun Evreni</title>
+  <link rel="stylesheet" href="css/stil.css">
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="img/ikon-192.png">
+  <link rel="apple-touch-icon" href="img/ikon-180.png">
+  <meta name="theme-color" content="#050b24">
+  <meta name="description" content="IndieVerse: bağımsız oyunları keşfet, puanla, topluluğa katıl ve ejderhaya dönüş.">
+</head>
+<body>
+
+  <header>
+    <h1>IndieVerse</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="aktif">Ana Sayfa</a></li>
+        <li><a href="oyuncu.html">Oyun Keşfet</a></li>
+        <li><a href="gelistirici.html">Geliştirici Paneli</a></li>
+        <li><a href="ag.html">Geliştirici Ağı</a></li>
+        <li><a href="topluluk.html">Topluluk</a></li>
+        <li><a href="uye.html">Üye Ol</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="banner tam">
+      <img src="img/fly.png" alt="Yeterince hızlı yüzerlerse ejderhaya dönüşen balıklar biliyorum">
+    </div>
+
+    <section id="giris-tanitim" class="hero">
+      <span class="etiket durum">🐉 Bağımsız oyun topluluğu</span>
+      <h2>Bağımsız Oyunların Yeni Evi</h2>
+      <p>
+        Özgün mekanikler, derin hikâyeler ve bağımsız geliştiricilerin yarattığı dünyalar tek yerde.
+        Oyunları keşfet, ayrıntılı puanla, geliştiricilere doğrudan geri bildirim ver ve topluluk içinde
+        balıktan ejderhaya dönüş.
+      </p>
+      <div class="hero-butonlar">
+        <a class="buton" href="oyuncu.html">🎮 Oyunları Keşfet</a>
+        <a class="buton ikincil-buton" href="gelistirici.html">🛠️ Oyununu Tanıt</a>
+        <a class="buton ikincil-buton" href="uye.html">🐟 Üye Ol</a>
+      </div>
+      <div class="istatistik-seridi">
+        <div><b id="statOyun">0</b><span>Oyun</span></div>
+        <div><b id="statOy">0</b><span>Puan verildi</span></div>
+        <div><b id="statYorum">0</b><span>Yorum</span></div>
+        <div><b id="statUye">0</b><span>Üye</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Neden IndieVerse?</h2>
+      <p>Küçük stüdyoların sesi kaybolmasın, oyuncuların görüşü gerçekten işe yarasın diye tasarlandı.</p>
+      <div class="ozellik-izgara">
+        <div class="ozellik"><span class="ozellik-ikon">🔍</span><h3>Akıllı Arama</h3><p>“korku prenses” gibi anahtar kelimelerle ad, anahtar kelime ve konuya göre en uygun oyunu bul.</p></div>
+        <div class="ozellik"><span class="ozellik-ikon">⭐</span><h3>Güvenilir Puanlama</h3><p>Az oyla gelen tek bir 5 yıldız, yüzlerce oyun toplayan oyunun önüne geçmez. Hikâye, görsel, oynanış ve atmosfer ayrı puanlanır.</p></div>
+        <div class="ozellik"><span class="ozellik-ikon">💬</span><h3>Doğrudan Geri Bildirim</h3><p>Geliştirici demosunu paylaşır, oyuncular yorumlarını doğrudan ona iletir.</p></div>
+        <div class="ozellik"><span class="ozellik-ikon">🤝</span><h3>Ekip Kur</h3><p>Programcı, müzisyen, çizer: Geliştirici Ağı’nda ilan ver, sohbet et, birlikte üret.</p></div>
+      </div>
+    </section>
+
+    <section class="rol-kapsayici">
+      <article class="rol-kart">
+        <h3>🎮 Oyuncuyum</h3>
+        <p>Spesifik türlere, atmosferlere ve derin hikâyelere sahip yeni indie yapımları keşfetmek istiyorum.</p>
+        <ul class="rol-ozellikler">
+          <li>Anahtar kelimeyle arama (örn: "korku prenses")</li>
+          <li>Demolara erişim ve oyunlara ayrıntılı puan verme</li>
+          <li>Geliştiriciye doğrudan geri bildirim gönderme</li>
+        </ul>
+        <a href="oyuncu.html" class="rol-buton">Evreni Keşfet &rarr;</a>
+      </article>
+
+      <article class="rol-kart gelistirici-kart">
+        <h3>🛠️ Oyun Geliştiricisiyim</h3>
+        <p>Projemi tanıtmak, demo test ettirmek, geri bildirim almak ve başka geliştiricilerle ekip kurmak istiyorum.</p>
+        <ul class="rol-ozellikler">
+          <li>Oyun vitrini: konu, amaç, anahtar kelimeler</li>
+          <li>Puan dağılımı ve kriter ortalamaları</li>
+          <li>Geliştirici sohbeti ve ekip ilanları</li>
+        </ul>
+        <a href="gelistirici.html" class="rol-buton">Oyununu Tanıt &rarr;</a>
+      </article>
+    </section>
+
+    <section>
+      <h2>Nasıl Çalışır?</h2>
+      <p>Üç adımda topluluğun parçası ol.</p>
+      <div class="adimlar">
+        <div class="adim"><span class="adim-no">1</span><h3>Üye ol</h3><p>Balık olarak başla. Hesabın bu tarayıcıda saklanır.</p></div>
+        <div class="adim"><span class="adim-no">2</span><h3>Katıl</h3><p>Oyunları puanla, yorum yap, öneri paylaş, etiketleri takip et.</p></div>
+        <div class="adim"><span class="adim-no">3</span><h3>Evrim geç</h3><p>Puan topladıkça yumurtadan çık, ejderhaya dönüş.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Öne Çıkan Oyun</h2>
+      <p>Güvenilir puanı en yüksek oyun otomatik olarak burada görünür.</p>
+      <div id="haftaninOyunu" class="vitrin"></div>
+    </section>
+
+    <section id="yolculuk">
+      <h2>Evrim Yolculuğu</h2>
+      <p>“Yeterince hızlı yüzersen ejderhaya dönüşürsün.” Her puan seni bir sonraki forma yaklaştırır.
+         Paylaşım 3, oyun puanlama 2, yorum 1 ve aldığın her beğeni 1 puan kazandırır.</p>
+      <div id="seviyeIzgara" class="seviye-izgara"></div>
+    </section>
+
+    <section class="cta">
+      <h2>Yolculuğa hazır mısın?</h2>
+      <p>Hesabını aç, ilk oyununu puanla ve balıktan ejderhaya giden yola çık.</p>
+      <a class="buton" href="uye.html">🐟 Hemen Üye Ol</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-izgara">
+      <div>
+        <b class="footer-marka">IndieVerse</b>
+        <p>Bağımsız oyunların keşfedildiği, puanlandığı ve birlikte büyütüldüğü topluluk.</p>
+      </div>
+      <div>
+        <b>Keşfet</b>
+        <a href="oyuncu.html">Oyun Keşfet</a>
+        <a href="topluluk.html">Topluluk</a>
+        <a href="index.html#yolculuk">Evrim Yolculuğu</a>
+      </div>
+      <div>
+        <b>Geliştiriciler</b>
+        <a href="gelistirici.html">Geliştirici Paneli</a>
+        <a href="ag.html">Geliştirici Ağı</a>
+        <a href="uye.html">Üye Ol</a>
+      </div>
+    </div>
+    <p class="footer-alt">&copy; 2026 IndieVerse &middot; Ağ Tabanlı Programlama Projesi &middot; Yeterince hızlı yüzersen ejderhaya dönüşürsün 🐉</p>
+  </footer>
+
+  <script src="js/ortak.js"></script>
+  <script src="js/ana.js"></script>
+  <script src="js/efekt.js"></script>
+</body>
+</html>

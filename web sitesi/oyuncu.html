@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndieVerse - Oyun Keşfet</title>
+  <link rel="stylesheet" href="css/stil.css">
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="img/ikon-192.png">
+  <link rel="apple-touch-icon" href="img/ikon-180.png">
+  <meta name="theme-color" content="#050b24">
+  <meta name="description" content="IndieVerse: bağımsız oyunları keşfet, puanla, topluluğa katıl ve ejderhaya dönüş.">
+</head>
+<body>
+
+  <header>
+    <h1>IndieVerse</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="oyuncu.html" class="aktif">Oyun Keşfet</a></li>
+        <li><a href="gelistirici.html">Geliştirici Paneli</a></li>
+        <li><a href="ag.html">Geliştirici Ağı</a></li>
+        <li><a href="topluluk.html">Topluluk</a></li>
+        <li><a href="uye.html">Üye Ol</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="kesif-alani">
+      <h2>Nasıl Bir Oyun Oynamak İstiyorsun?</h2>
+      <p>Anahtar kelimeleri yaz: "korku prenses", "uzay çiftlik", "dedektif piksel"... Sana en uygun oyunlar en üstte çıkar.</p>
+
+      <form id="filtreFormu" action="#" method="get">
+        <p>
+          <label for="arananKelime">Anahtar Kelime veya Oyun Adı:</label><br>
+          <input type="text" id="arananKelime" name="arananKelime" placeholder="Örn: korku prenses saray">
+        </p>
+
+        <div class="form-izgara">
+          <p>
+            <label for="anaTur">Ana Oyun Türü:</label><br>
+            <select id="anaTur" name="anaTur">
+              <option value="tumu">Tüm Türler</option>
+              <option value="korku">Korku ve Gerilim</option>
+              <option value="rpg">Rol Yapma (RPG) ve Hikâye</option>
+              <option value="platform">2D Platform / Metroidvania</option>
+              <option value="bulmaca">Bulmaca ve Gizem</option>
+              <option value="strateji">Strateji / Kart</option>
+              <option value="hayatta-kalma">Hayatta Kalma (Survival)</option>
+            </select>
+          </p>
+
+          <p>
+            Platform Tercihi:<br>
+            <input type="checkbox" id="platPc" name="platform" value="pc">
+            <label for="platPc">PC</label>
+            <input type="checkbox" id="platKonsol" name="platform" value="konsol">
+            <label for="platKonsol">Konsol</label>
+            <input type="checkbox" id="platMobil" name="platform" value="mobil">
+            <label for="platMobil">Mobil</label>
+          </p>
+        </div>
+
+        <div class="form-izgara">
+          <p>
+            <label for="siralama">Sıralama:</label><br>
+            <select id="siralama" name="siralama">
+              <option value="uygun">En uygun (aramaya göre)</option>
+              <option value="guvenilir">Güvenilir puan (önerilen)</option>
+              <option value="ortalama">En yüksek ortalama</option>
+              <option value="oyadet">En çok oy alan</option>
+              <option value="yeni">En yeni eklenen</option>
+            </select>
+          </p>
+          <p>
+            <label for="minPuan">En az puan:</label><br>
+            <select id="minPuan" name="minPuan">
+              <option value="0">Fark etmez</option>
+              <option value="3">3 ★ ve üzeri</option>
+              <option value="4">4 ★ ve üzeri</option>
+              <option value="4.5">4.5 ★ ve üzeri</option>
+            </select>
+          </p>
+        </div>
+
+        <p>
+          Atmosfer ve Sanat Tarzı:<br>
+          <input type="radio" id="tarzHepsi" name="atmosfer" value="hepsi" checked>
+          <label for="tarzHepsi">Tümü</label>
+          <input type="radio" id="tarzPsikolojik" name="atmosfer" value="psikolojik">
+          <label for="tarzPsikolojik">Karanlık / Psikolojik</label>
+          <input type="radio" id="tarzPiksel" name="atmosfer" value="piksel">
+          <label for="tarzPiksel">Retro / Piksel</label>
+          <input type="radio" id="tarzRahat" name="atmosfer" value="rahat">
+          <label for="tarzRahat">Sakin / Cozy</label>
+        </p>
+
+        <button type="submit">🔍 Oyunları Filtrele</button>
+      </form>
+    </section>
+
+    <section id="sonuc-alani">
+      <h2>Sonuçlar</h2>
+      <p id="sonucSayisi"></p>
+      <div id="sonuclar" class="oyun-izgara"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-izgara">
+      <div>
+        <b class="footer-marka">IndieVerse</b>
+        <p>Bağımsız oyunların keşfedildiği, puanlandığı ve birlikte büyütüldüğü topluluk.</p>
+      </div>
+      <div>
+        <b>Keşfet</b>
+        <a href="oyuncu.html">Oyun Keşfet</a>
+        <a href="topluluk.html">Topluluk</a>
+        <a href="index.html#yolculuk">Evrim Yolculuğu</a>
+      </div>
+      <div>
+        <b>Geliştiriciler</b>
+        <a href="gelistirici.html">Geliştirici Paneli</a>
+        <a href="ag.html">Geliştirici Ağı</a>
+        <a href="uye.html">Üye Ol</a>
+      </div>
+    </div>
+    <p class="footer-alt">&copy; 2026 IndieVerse &middot; Ağ Tabanlı Programlama Projesi &middot; Yeterince hızlı yüzersen ejderhaya dönüşürsün 🐉</p>
+  </footer>
+
+  <script src="js/ortak.js"></script>
+  <script src="js/oyuncu.js"></script>
+  <script src="js/efekt.js"></script>
+</body>
+</html>

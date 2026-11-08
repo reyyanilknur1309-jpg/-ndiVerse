@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndieVerse - Üye Ol</title>
+  <link rel="stylesheet" href="css/stil.css">
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="img/ikon-192.png">
+  <link rel="apple-touch-icon" href="img/ikon-180.png">
+  <meta name="theme-color" content="#050b24">
+  <meta name="description" content="IndieVerse: bağımsız oyunları keşfet, puanla, topluluğa katıl ve ejderhaya dönüş.">
+</head>
+<body>
+
+  <header>
+    <h1>IndieVerse</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="oyuncu.html">Oyun Keşfet</a></li>
+        <li><a href="gelistirici.html">Geliştirici Paneli</a></li>
+        <li><a href="ag.html">Geliştirici Ağı</a></li>
+        <li><a href="topluluk.html">Topluluk</a></li>
+        <li><a href="uye.html" class="aktif">Üye Ol</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="banner uzun">
+      <img src="img/sualti.png" alt="Sualtı dünyası">
+      <div class="banner-yazi">
+        <h2>Aramıza Katıl</h2>
+        <p>Yeterince hızlı yüzersen ejderhaya dönüşürsün. Üye ol, oyunları puanla, toplulukta paylaş.</p>
+      </div>
+    </div>
+
+    <div class="topluluk-izgara">
+
+      <section id="uye-alani">
+        <div class="sekmeler" id="uyeSekmeler">
+          <button type="button" class="sekme aktif" data-sekme="kayit">📝 Üye Ol</button>
+          <button type="button" class="sekme" data-sekme="giris">🔑 Giriş Yap</button>
+        </div>
+
+        <div class="uyari">
+          ⚠️ Bu sürümde hesaplar yalnızca bu tarayıcıda saklanır (demo). Şifreler düz metin olarak değil,
+          özetlenerek (hash) saklanır; gerçek güvenlik için ileride bir sunucu bağlanacak.
+        </div>
+
+        <!-- ===== Kayıt formu ===== -->
+        <form id="kayitFormu">
+          <div class="form-izgara">
+            <p>
+              <label for="kKullanici">Kullanıcı adı:</label><br>
+              <input type="text" id="kKullanici" name="kullanici" placeholder="Örn: ejderha_avcisi" required maxlength="20">
+            </p>
+            <p>
+              <label for="kEposta">E-posta:</label><br>
+              <input type="email" id="kEposta" name="eposta" placeholder="ornek@mail.com" required>
+            </p>
+            <p>
+              <label for="kSifre">Şifre:</label><br>
+              <input type="password" id="kSifre" name="sifre" placeholder="En az 6 karakter" required minlength="6" autocomplete="new-password">
+              <span class="guc"><div id="gucCubuk"></div></span>
+              <small id="gucYazi" class="puan-bilgi"></small>
+            </p>
+            <p>
+              <label for="kSifre2">Şifre (tekrar):</label><br>
+              <input type="password" id="kSifre2" name="sifre2" placeholder="Şifreni tekrar yaz" required minlength="6" autocomplete="new-password">
+            </p>
+          </div>
+
+          <p>
+            <input type="checkbox" id="sifreGoster">
+            <label for="sifreGoster">Şifreyi göster</label>
+          </p>
+
+          <p>
+            Rolün:<br>
+            <input type="radio" id="rolOyuncu" name="rol" value="oyuncu" checked>
+            <label for="rolOyuncu">🎮 Oyuncu</label>
+            <input type="radio" id="rolGelistirici" name="rol" value="gelistirici">
+            <label for="rolGelistirici">🛠️ Geliştirici</label>
+          </p>
+
+          <p>
+            İlgi alanların:<br>
+            <input type="checkbox" id="ilgiKorku" name="ilgi" value="korku">
+            <label for="ilgiKorku">Korku</label>
+            <input type="checkbox" id="ilgiRpg" name="ilgi" value="rpg">
+            <label for="ilgiRpg">RPG</label>
+            <input type="checkbox" id="ilgiPlatform" name="ilgi" value="platform">
+            <label for="ilgiPlatform">Platform</label>
+            <input type="checkbox" id="ilgiBulmaca" name="ilgi" value="bulmaca">
+            <label for="ilgiBulmaca">Bulmaca</label>
+            <input type="checkbox" id="ilgiStrateji" name="ilgi" value="strateji">
+            <label for="ilgiStrateji">Strateji</label>
+            <input type="checkbox" id="ilgiHayatta" name="ilgi" value="hayatta-kalma">
+            <label for="ilgiHayatta">Hayatta Kalma</label>
+          </p>
+
+          <button type="submit">🐟 Üye Ol</button>
+        </form>
+
+        <!-- ===== Giriş formu ===== -->
+        <form id="girisFormu" hidden>
+          <p>
+            <label for="gKimlik">Kullanıcı adı veya e-posta:</label><br>
+            <input type="text" id="gKimlik" name="kimlik" placeholder="ejderha_avcisi veya ornek@mail.com" required>
+          </p>
+          <p>
+            <label for="gSifre">Şifre:</label><br>
+            <input type="password" id="gSifre" name="sifre" placeholder="Şifren" required autocomplete="current-password">
+          </p>
+          <button type="submit">🔑 Giriş Yap</button>
+        </form>
+
+        <div id="uyeMesaj" class="uye-mesaj" hidden></div>
+      </section>
+
+      <aside class="yan-kolon">
+        <div class="yan-kutu" id="profilKutusu"></div>
+        <div class="yan-kutu">
+          <h3>🐉 Evrim Yolculuğu</h3>
+          <ul class="seviye-liste" id="seviyeListe"></ul>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-izgara">
+      <div>
+        <b class="footer-marka">IndieVerse</b>
+        <p>Bağımsız oyunların keşfedildiği, puanlandığı ve birlikte büyütüldüğü topluluk.</p>
+      </div>
+      <div>
+        <b>Keşfet</b>
+        <a href="oyuncu.html">Oyun Keşfet</a>
+        <a href="topluluk.html">Topluluk</a>
+        <a href="index.html#yolculuk">Evrim Yolculuğu</a>
+      </div>
+      <div>
+        <b>Geliştiriciler</b>
+        <a href="gelistirici.html">Geliştirici Paneli</a>
+        <a href="ag.html">Geliştirici Ağı</a>
+        <a href="uye.html">Üye Ol</a>
+      </div>
+    </div>
+    <p class="footer-alt">&copy; 2026 IndieVerse &middot; Ağ Tabanlı Programlama Projesi &middot; Yeterince hızlı yüzersen ejderhaya dönüşürsün 🐉</p>
+  </footer>
+
+  <script src="js/ortak.js"></script>
+  <script src="js/uye.js"></script>
+  <script src="js/efekt.js"></script>
+</body>
+</html>

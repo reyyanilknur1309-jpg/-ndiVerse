@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndieVerse - Topluluk</title>
+  <link rel="stylesheet" href="css/stil.css">
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="img/ikon-192.png">
+  <link rel="apple-touch-icon" href="img/ikon-180.png">
+  <meta name="theme-color" content="#050b24">
+  <meta name="description" content="IndieVerse: bağımsız oyunları keşfet, puanla, topluluğa katıl ve ejderhaya dönüş.">
+</head>
+<body>
+
+  <header>
+    <h1>IndieVerse</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="oyuncu.html">Oyun Keşfet</a></li>
+        <li><a href="gelistirici.html">Geliştirici Paneli</a></li>
+        <li><a href="ag.html">Geliştirici Ağı</a></li>
+        <li><a href="topluluk.html" class="aktif">Topluluk</a></li>
+        <li><a href="uye.html">Üye Ol</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="banner uzun">
+      <img src="img/dragon.png" alt="Mavi ejderha" class="ust-hizala">
+      <div class="banner-yazi">
+        <h2>Topluluk</h2>
+        <p>Oyunlara yorum yap, oyun öner, yeni oyunlar keşfet.</p>
+      </div>
+    </div>
+
+    <div class="topluluk-izgara">
+
+      <div class="ana-kolon">
+
+        <section id="paylasim-alani">
+          <h2>Ne oynuyorsun?</h2>
+          <div class="uyari">
+            ⚠️ Bu sürümde paylaşımlar yalnızca senin tarayıcında saklanır (demo). Herkesin birbirini görmesi için
+            ileride bir sunucu/veritabanı bağlanacak.
+          </div>
+
+          <form id="gonderiFormu">
+            <div class="form-izgara">
+              <p>
+                <label for="gKisi">Adın:</label><br>
+                <input type="text" id="gKisi" name="kisi" placeholder="Örn: Zehra" required maxlength="30">
+              </p>
+              <p>
+                <label for="gTur">Paylaşım türü:</label><br>
+                <select id="gTur" name="tur">
+                  <option value="yorum">💬 Oyuna yorum</option>
+                  <option value="oneri">💡 Oyun öner</option>
+                  <option value="paylasim">📢 Genel paylaşım</option>
+                </select>
+              </p>
+              <p>
+                <label for="gOyun">Oyun adı:</label><br>
+                <input type="text" id="gOyun" name="oyun" list="oyunListesi" maxlength="60" placeholder="Listeden seç ya da kendin yaz">
+                <datalist id="oyunListesi"></datalist>
+              </p>
+              <p id="puanAlani">
+                <label for="gPuan">Puanın:</label><br>
+                <select id="gPuan" name="puan">
+                  <option value="5">★★★★★ (5)</option>
+                  <option value="4">★★★★☆ (4)</option>
+                  <option value="3">★★★☆☆ (3)</option>
+                  <option value="2">★★☆☆☆ (2)</option>
+                  <option value="1">★☆☆☆☆ (1)</option>
+                </select>
+              </p>
+            </div>
+
+            <p>
+              <label for="gMetin">Düşüncelerin:</label><br>
+              <textarea id="gMetin" name="metin" rows="3" maxlength="400" required
+                placeholder="Neler düşünüyorsun? #korku #cozy gibi etiketler kullanabilirsin"></textarea>
+            </p>
+
+            <button type="submit">📤 Paylaş</button>
+          </form>
+        </section>
+
+        <section id="akis-alani">
+          <h2>Akış</h2>
+          <div class="sekmeler" id="sekmeler">
+            <button type="button" class="sekme aktif" data-sekme="akis">Akış</button>
+            <button type="button" class="sekme" data-sekme="oneri">💡 Öneriler</button>
+            <button type="button" class="sekme" data-sekme="yorum">💬 Yorumlar</button>
+            <button type="button" class="sekme" data-sekme="populer">🔥 Popüler</button>
+          </div>
+          <p><input type="text" id="akisArama" placeholder="Ara: oyun, kişi veya #etiket"></p>
+          <div id="akis"></div>
+        </section>
+
+      </div>
+
+      <aside class="yan-kolon">
+        <div class="yan-kutu">
+          <h3>🔥 Gündemdeki Etiketler</h3>
+          <div id="etiketBulutu" class="etiketler"></div>
+        </div>
+        <div class="yan-kutu">
+          <h3>⭐ En Yüksek Puanlı Oyunlar</h3>
+          <ol id="enIyiler" class="en-iyiler"></ol>
+        </div>
+        <div class="yan-kutu">
+          <h3>📊 Topluluk</h3>
+          <p id="istatistik"></p>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-izgara">
+      <div>
+        <b class="footer-marka">IndieVerse</b>
+        <p>Bağımsız oyunların keşfedildiği, puanlandığı ve birlikte büyütüldüğü topluluk.</p>
+      </div>
+      <div>
+        <b>Keşfet</b>
+        <a href="oyuncu.html">Oyun Keşfet</a>
+        <a href="topluluk.html">Topluluk</a>
+        <a href="index.html#yolculuk">Evrim Yolculuğu</a>
+      </div>
+      <div>
+        <b>Geliştiriciler</b>
+        <a href="gelistirici.html">Geliştirici Paneli</a>
+        <a href="ag.html">Geliştirici Ağı</a>
+        <a href="uye.html">Üye Ol</a>
+      </div>
+    </div>
+    <p class="footer-alt">&copy; 2026 IndieVerse &middot; Ağ Tabanlı Programlama Projesi &middot; Yeterince hızlı yüzersen ejderhaya dönüşürsün 🐉</p>
+  </footer>
+
+  <script src="js/ortak.js"></script>
+  <script src="js/topluluk.js"></script>
+  <script src="js/efekt.js"></script>
+</body>
+</html>
