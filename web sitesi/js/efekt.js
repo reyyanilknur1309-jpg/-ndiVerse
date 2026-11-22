@@ -1,7 +1,7 @@
-/* ================= IndieVerse - Görsel Efektler ================= */
+/* ================= IndieVerse - Görsel Efektler (v3) ================= */
 (function () {
 
-  /* 1) Mobil menü butonu (HTML'e dokunmadan eklenir) */
+  /* 1) Mobil menü butonu */
   const header = document.querySelector("header");
   const nav = header && header.querySelector("nav");
   if (header && nav) {
@@ -28,7 +28,7 @@
           gozlemci.unobserve(k.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
     hedefler.forEach(h => { h.classList.add("gizli"); gozlemci.observe(h); });
   }
 
@@ -73,21 +73,8 @@
   requestAnimationFrame(ciz);
 })();
 
-/* 4) Menüye "Topluluk" bağlantısını otomatik ekle */
+/* 4) Logo, sekme simgesi ve eksik menü bağlantıları */
 (function () {
-  const liste = document.querySelector("header nav ul");
-  if (!liste || liste.querySelector('a[href="topluluk.html"]')) return;
-  const li = document.createElement("li");
-  const a = document.createElement("a");
-  a.href = "topluluk.html";
-  a.textContent = "Topluluk";
-  li.appendChild(a);
-  liste.appendChild(li);
-})();
-
-/* 5) Logo, sekme simgesi ve "Üye Ol" bağlantısı */
-(function () {
-  /* Logo: "IndieVerse" yazısının soluna */
   const h1 = document.querySelector("header h1");
   if (h1 && !document.querySelector("header .logo")) {
     const a = document.createElement("a");
@@ -103,48 +90,19 @@
     a.appendChild(h1);
   }
 
-  /* Tarayıcı sekmesindeki küçük simge */
   if (!document.querySelector('link[rel~="icon"]')) {
     const l = document.createElement("link");
     l.rel = "icon";
     l.href = "img/logo.png";
     document.head.appendChild(l);
   }
-
-  /* Menüye "Üye Ol" */
-  const liste = document.querySelector("header nav ul");
-  if (liste && !liste.querySelector('a[href="uye.html"]')) {
-    const li = document.createElement("li");
-    const a2 = document.createElement("a");
-    a2.href = "uye.html";
-    a2.textContent = "Üye Ol";
-    li.appendChild(a2);
-    liste.appendChild(li);
-  }
 })();
 
-/* 6) Girişliyse menüde seviye rozeti + kullanıcı adı göster */
-(function () {
-  if (typeof IV === "undefined") return;
-  const oturum = IV.oku("indieverse_oturum", null);
-  const link = document.querySelector('header nav a[href="uye.html"]');
-  if (!oturum || !link) return;
-  const { sv } = IV.seviyeBul(IV.kullaniciIstatistik(oturum.kullanici).puan);
-  link.textContent = "";
-  const img = document.createElement("img");
-  img.src = IV.rozetUrl(sv, true);
-  img.alt = sv.ad;
-  img.className = "nav-rozet";
-  link.appendChild(img);
-  link.appendChild(document.createTextNode(" " + oturum.kullanici));
-  link.title = sv.ad + " · profilini aç";
-})();
-/* 7) Animasyon paketi 1: kaydırma çubuğu, eğilme, dalga, ışık, yukarı çık */
+/* 5) Kaydırma çubuğu, 3B kart eğilme, dalga, imleç ışığı, yukarı çık */
 (function () {
   const azHareket = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const dokunmatik = window.matchMedia("(hover: none)").matches;
 
-  /* Kaydırma çubuğu + menü gölgesi + yukarı çık */
   const cubuk = document.createElement("div");
   cubuk.id = "kaydirmaCubugu";
   document.body.appendChild(cubuk);
@@ -175,10 +133,9 @@
 
   if (azHareket) return;
 
-  /* Buton dalga efekti */
   document.addEventListener("click", e => {
     const b = e.target.closest("button, .buton, .rol-buton");
-    if (!b) return;
+    if (!b || b.closest("#periKapsayici")) return;
     const st = getComputedStyle(b);
     if (st.position === "static") b.style.position = "relative";
     b.style.overflow = "hidden";
@@ -195,7 +152,6 @@
 
   if (dokunmatik) return;
 
-  /* Kartlarda 3B eğilme */
   const KARTLAR = ".oyun-kart, .ozellik, .rol-kart, .seviye-kart";
   let aktif = null;
   document.addEventListener("pointermove", e => {
@@ -213,7 +169,6 @@
     if (!e.relatedTarget && aktif) { aktif.style.transform = ""; aktif = null; }
   });
 
-  /* Fareyi izleyen ışık */
   const isik = document.createElement("div");
   isik.id = "imlecIsik";
   document.body.appendChild(isik);
@@ -223,7 +178,8 @@
   });
   document.addEventListener("mouseleave", () => { isik.style.opacity = 0; });
 })();
-/* 8) Animasyon paketi 2: evrim ve seviye atlama efekti */
+
+/* 6) Evrim ve seviye atlama kutlaması */
 (function () {
   if (typeof IV === "undefined") return;
 
@@ -231,7 +187,6 @@
   const azHareket = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let acik = false;
 
-  /* Konfeti */
   function konfeti() {
     if (azHareket) return;
     const c = document.createElement("canvas");
@@ -271,7 +226,6 @@
     })();
   }
 
-  /* Kutlama penceresi */
   function kutla(eski, yeni) {
     acik = true;
     const katman = document.createElement("div");
@@ -297,6 +251,7 @@
     document.body.appendChild(katman);
     requestAnimationFrame(() => katman.classList.add("goster"));
     setTimeout(konfeti, azHareket ? 0 : 900);
+    document.dispatchEvent(new CustomEvent("evrimGecirdi", { detail: { eski, yeni } }));
 
     function kapat() {
       document.removeEventListener("keydown", tus);
@@ -312,7 +267,6 @@
     if (dugme) dugme.focus();
   }
 
-  /* Menüdeki ve profildeki rozeti güncelle */
   function rozetleriYenile(sv) {
     const nav = document.querySelector(".nav-rozet");
     if (nav) {
@@ -332,17 +286,16 @@
     }
   }
 
-  /* Seviye atladı mı? */
   function kontrol() {
     if (acik) return;
-    const oturum = IV.oku("indieverse_oturum", null);
-    if (!oturum) return;
-    const { i, sv } = IV.seviyeBul(IV.kullaniciIstatistik(oturum.kullanici).puan);
+    const kul = IV.oturum();
+    if (!kul || !IV.hesapBul(kul)) return;
+    const { i, sv } = IV.seviyeBul(IV.xpToplam(kul), kul);
     const kayit = IV.oku(SON, {});
-    const anahtar = IV.kucuk(oturum.kullanici);
+    const anahtar = IV.kucuk(kul);
     const onceki = kayit[anahtar];
 
-    if (onceki === undefined || i < onceki) {   // ilk kez görüyoruz ya da puan düştü: sessizce kaydet
+    if (onceki === undefined || i < onceki) {
       kayit[anahtar] = i;
       IV.yaz(SON, kayit);
       return;
@@ -355,19 +308,85 @@
     }
   }
 
-  /* Sayfa açılınca, tıklama/gönderme sonrası ve başka sekmede değişince kontrol et */
-  window.addEventListener("load", () => setTimeout(kontrol, 800));
-  document.addEventListener("click", () => setTimeout(kontrol, 500));
-  document.addEventListener("submit", () => setTimeout(kontrol, 900));
+  window.addEventListener("load", () => setTimeout(kontrol, 600));
+  document.addEventListener("xpDegisti", () => setTimeout(kontrol, 250));
+  document.addEventListener("favoriDegisti", () => setTimeout(kontrol, 250));
   window.addEventListener("storage", () => setTimeout(kontrol, 300));
 
-  /* Sunum/test için: tarayıcı konsoluna evrimTest() yaz */
   window.evrimTest = function () {
-    const oturum = IV.oku("indieverse_oturum", null);
-    const puan = oturum ? IV.kullaniciIstatistik(oturum.kullanici).puan : 0;
-    const { i } = IV.seviyeBul(puan);
+    const kul = IV.oturum();
+    const puan = kul ? IV.xpToplam(kul) : 0;
+    const { i } = IV.seviyeBul(puan, kul);
     const sonraki = Math.min(i + 1, IV.seviyeler.length - 1);
     acik = false;
     kutla(IV.seviyeler[i], IV.seviyeler[sonraki]);
   };
+})();
+
+/* 7) Menüde gelişmiş XP çubuğu, çarpan rozeti, günlük giriş ve bildirim zili */
+(function () {
+  if (typeof IV === "undefined" || !IV.oturum) return;
+
+  const ul = document.querySelector("header nav ul");
+  const link = document.querySelector('header nav a[href="uye.html"], header nav a.nav-profil');
+  if (!ul || !link) return;
+  let zilLi = null;
+  const profilSayfasi = /profil\.html$/i.test(location.pathname);
+
+  function ciz() {
+    const kul = IV.oturum();
+    if (!kul || !IV.hesapBul(kul)) {
+      link.classList.remove("nav-profil");
+      if (profilSayfasi) link.classList.remove("aktif");
+      link.href = "uye.html";
+      link.textContent = "Üye Ol";
+      link.removeAttribute("title");
+      if (zilLi) { zilLi.remove(); zilLi = null; }
+      return;
+    }
+    const puan = IV.xpToplam(kul);
+    const o = IV.seviyeOzet(puan, kul);
+    const c = o.carpan;
+    link.classList.add("nav-profil");
+    if (profilSayfasi) link.classList.add("aktif");
+    link.href = "profil.html";
+    link.title = "Sv. " + o.seviyeNo + " · " + o.sv.ad + " " + o.kademeRoma + " · " + puan + " XP" +
+      (c.toplam > 1 ? " (×" + c.toplam + " çarpan)" : "") + " · profilini aç";
+    link.style.setProperty("--r", o.sv.renk);
+    link.innerHTML =
+      '<img class="nav-rozet" src="' + IV.rozetUrl(o.sv, true) + '" alt="' + IV.temiz(o.sv.ad) + '">' +
+      '<span class="nav-metin"><b>' + IV.temiz(kul) +
+        (c.toplam > 1 ? ' <em class="nav-carpan">×' + c.toplam + '</em>' : '') +
+      '</b><small>Sv.' + o.seviyeNo + ' · ' + IV.temiz(o.sv.ad) + ' ' + o.kademeRoma + '</small></span>' +
+      '<span class="nav-xp"><i style="width:' + o.yuzde + '%"></i></span>';
+
+    const yeni = IV.bildirimler(kul).filter(x => !x.o).length;
+    if (!zilLi) { zilLi = document.createElement("li"); ul.appendChild(zilLi); }
+    zilLi.innerHTML = '<a class="nav-zil" href="topluluk.html#bildirimler" aria-label="Bildirimler, ' + yeni + ' yeni">🔔' +
+      (yeni ? '<span class="zil-sayi">' + yeni + '</span>' : "") + "</a>";
+  }
+
+  function girisVeCiz() {
+    const kul = IV.oturum();
+    if (kul) IV.gunlukGiris(kul);
+    ciz();
+  }
+
+  document.addEventListener("oturumDegisti", girisVeCiz);
+  document.addEventListener("bildirimDegisti", ciz);
+  document.addEventListener("xpDegisti", () => {
+    ciz();
+    link.classList.remove("xp-pulse");
+    void link.offsetWidth;
+    link.classList.add("xp-pulse");
+  });
+  window.addEventListener("storage", ciz);
+
+  const kaldir = Storage.prototype.removeItem;
+  Storage.prototype.removeItem = function (k) {
+    kaldir.call(this, k);
+    if (k === "indieverse_oturum") document.dispatchEvent(new Event("oturumDegisti"));
+  };
+
+  girisVeCiz();
 })();

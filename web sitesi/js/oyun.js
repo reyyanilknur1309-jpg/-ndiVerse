@@ -1,4 +1,4 @@
-/* ================= Oyun detay sayfası ================= */
+/* ================= Oyun detay sayfası (v3) ================= */
 (function () {
   const id = new URLSearchParams(location.search).get("id");
   const kutu = document.getElementById("detay");
@@ -13,10 +13,11 @@
       benzerAlan.hidden = true;
       return;
     }
+    benzerAlan.hidden = false;
     document.title = "IndieVerse - " + o.ad;
 
     const acik = IV.acikKartlar(kutu);
-    kutu.innerHTML = IV.kartHtml(o);
+    kutu.innerHTML = IV.kartHtml(o, { detaySayfa: true });
     IV.acikKartlariGeriYukle(kutu, acik);
 
     const acikB = IV.acikKartlar(benzer);
@@ -29,5 +30,6 @@
 
   IV.baglaKartOlaylari(kutu, () => ciz());
   IV.baglaKartOlaylari(benzer, () => ciz());
+  document.addEventListener("oturumDegisti", ciz);
   ciz();
 })();

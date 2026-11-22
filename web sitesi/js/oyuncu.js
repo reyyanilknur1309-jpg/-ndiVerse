@@ -1,4 +1,4 @@
-/* ================= Oyun Keşfet sayfası ================= */
+/* ================= Oyun Keşfet sayfası (v3) ================= */
 (function () {
   const form = document.getElementById("filtreFormu");
   const sonuclar = document.getElementById("sonuclar");
@@ -64,7 +64,6 @@
   function ciz(sirayiKoru) {
     const acik = IV.acikKartlar(sonuclar);
     const liste = filtrele();
-    // Puan verince kartın yer değiştirmemesi için mevcut sırayı koru
     if (sirayiKoru === true && kilitSira.length) {
       liste.sort((a, b) => kilitSira.indexOf(a.id) - kilitSira.indexOf(b.id));
     }
@@ -81,5 +80,6 @@
   form.arananKelime.addEventListener("input", () => ciz());
 
   IV.baglaKartOlaylari(sonuclar, () => ciz(true));
+  document.addEventListener("oturumDegisti", () => ciz(true));
   ciz();
 })();

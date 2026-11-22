@@ -1,4 +1,4 @@
-/* ================= Üyelik: kayıt, giriş, profil ================= */
+/* ================= Üyelik: kayıt, giriş, profil (v3) ================= */
 (function () {
   const HESAPLAR = "indieverse_hesaplar";
   const OTURUM = "indieverse_oturum";
@@ -46,7 +46,10 @@
     kutu.innerHTML = IV.seviyeler.map((s, k) => `
       <li class="${k === aktifIndex ? "aktif" : ""} ${aktifIndex >= 0 && k > aktifIndex ? "kilitli" : ""}">
         <img src="${IV.rozetUrl(s, true)}" alt="${IV.temiz(s.ad)}">
-        <div><b>${IV.temiz(s.ad)}</b><small>${s.esik} puan</small></div>
+        <div>
+          <b>${IV.temiz(s.ad)}</b>
+          <small>${s.esik} XP${s.sartMetin ? " · " + IV.temiz(s.sartMetin) : ""}</small>
+        </div>
       </li>`).join("");
   }
 
@@ -56,43 +59,39 @@
       profilKutusu.innerHTML = `
         <h3>👤 Profil</h3>
         <div class="rozet-ortala"><img class="rozet-buyuk" src="${IV.rozetUrl(IV.seviyeler[0])}" alt="Balık"></div>
-        <p>Henüz giriş yapmadın. Üye ol ya da giriş yap; yolculuğun <b>Balık</b> olarak başlar.</p>`;
+        <p>Henüz giriş yapmadın. Üye ol ya da giriş yap; yolculuğun <b>Sv. 1 · Balık I</b> olarak başlar.</p>`;
       seviyeListesiCiz(-1);
       return;
     }
     const ist = IV.kullaniciIstatistik(h.kullanici);
-    const { i, sv, sonraki } = IV.seviyeBul(ist.puan);
+    const o = IV.seviyeOzet(ist.puan, h.kullanici);
+    const sv = o.sv;
     const harf = IV.temiz((Array.from(h.kullanici)[0] || "?").toUpperCase());
     const ilgiler = (h.ilgi || []).map(t =>
       '<span class="etiket">' + IV.temiz(IV.turler[t] || t) + "</span>").join("");
-    const ozellikler = sv.ozellikler.map(o => `<span class="etiket durum">${IV.temiz(o)}</span>`).join("");
-    const yuzde = sonraki
-      ? Math.min(100, Math.round((ist.puan - sv.esik) / (sonraki.esik - sv.esik) * 100)) : 100;
+    const ozellikler = sv.ozellikler.map(x => `<span class="etiket durum">${IV.temiz(x)}</span>`).join("");
 
     profilKutusu.innerHTML = `
       <h3>👤 Profilim</h3>
       <div class="rozet-ortala"><img class="rozet-buyuk" src="${IV.rozetUrl(sv)}" alt="${IV.temiz(sv.ad)}"></div>
       <div class="profil-ust">
-        <div class="avatar buyuk" style="background:${renk(h.kullanici)}">${harf}</div>
+        <div class="avatar buyuk cerceveli" style="background:${renk(h.kullanici)};--r:${sv.renk}">${harf}</div>
         <div>
           <b>${IV.temiz(h.kullanici)}</b>
           <div class="studyo">${h.rol === "gelistirici" ? "🛠️ Geliştirici" : "🎮 Oyuncu"}</div>
         </div>
       </div>
-      <p class="seviye-satir"><b>${IV.temiz(sv.ad)}</b> · ${ist.puan} puan</p>
+      <p class="seviye-satir"><b>Sv. ${o.seviyeNo} · ${IV.temiz(sv.ad)} ${o.kademeRoma}</b> · ${ist.puan} XP</p>
       <p class="seviye-slogan">“${IV.temiz(sv.slogan)}”</p>
       <div class="etiketler" style="margin-bottom:10px;">${ozellikler}</div>
-      <div class="ilerleme" title="%${yuzde}"><div style="width:${yuzde}%"></div></div>
-      <p class="puan-bilgi">${sonraki
-        ? sonraki.ad + " için " + (sonraki.esik - ist.puan) + " puan kaldı."
-        : "En üst seviyedesin! 🎉"}</p>
-      <p class="puan-bilgi" style="margin-top:8px;">📝 ${ist.paylasim} paylaşım · 💬 ${ist.yorum} yorum · ❤️ ${ist.begeni} beğeni · ⭐ ${ist.puanlanan} oyun puanı</p>
+      ${IV.xpBarHtml(ist.puan, h.kullanici)}
+      <p class="puan-bilgi" style="margin-top:10px;">📝 ${ist.paylasim} paylaşım · 💬 ${ist.yorum} yorum · ❤️ ${ist.begeni} tepki · ⭐ ${ist.puanlanan} oyun puanı</p>
       <div class="etiketler" style="margin-top:10px;">${ilgiler}</div>
-      <p style="margin-top:12px;">
-        <a class="buton" href="topluluk.html">Topluluğa Git</a>
+      <p style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;">
+        <a class="buton" href="profil.html">🏅 Profilime Git</a>
         <button type="button" class="ikincil" id="cikisBtn">Çıkış Yap</button>
       </p>`;
-    seviyeListesiCiz(i);
+    seviyeListesiCiz(o.i);
   }
 
   /* ---------- Şifre gücü ---------- */
@@ -191,6 +190,8 @@
     profilCiz();
   });
 
+  document.addEventListener("xpDegisti", profilCiz);
+  document.addEventListener("oturumDegisti", profilCiz);
   window.addEventListener("storage", e => {
     if (e.key === OTURUM || e.key === HESAPLAR || e.key === "indieverse_gonderiler" || e.key === IV.ANAHTAR) profilCiz();
   });

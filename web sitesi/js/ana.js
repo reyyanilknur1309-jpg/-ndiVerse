@@ -1,4 +1,4 @@
-/* ================= Ana sayfa: canlı sayılar + evrim yolculuğu ================= */
+/* ================= Ana sayfa: canlı sayılar + evrim yolculuğu (v3) ================= */
 (function () {
   const oyunlar = IV.oyunlariGetir();
   const gonderiler = IV.oku("indieverse_gonderiler", []);
@@ -34,15 +34,15 @@
       const p = IV.ortalama(o);
       kutu.innerHTML = `
         <span class="etiket durum">🏆 Haftanın Oyunu</span>
-        <h3>${IV.temiz(o.ad)}</h3>
+        <h3><a class="oyun-baslik-link" href="oyun.html?id=${encodeURIComponent(o.id)}">${IV.temiz(o.ad)}</a></h3>
         <p class="studyo">${IV.temiz(o.studyo)} · ${IV.temiz(IV.turler[o.tur] || o.tur)}</p>
         <p>${IV.temiz(o.aciklama)}</p>
         <p class="puan-bilgi"><span class="puan-sayi" style="font-size:1.3rem;">${p.ort.toFixed(1)}</span> ★ · ${p.adet} oy · güvenilir puan ${IV.agirlikliPuan(o, C).toFixed(2)}</p>
-        <a class="buton" href="oyuncu.html">Oyunu Keşfet →</a>`;
+        <a class="buton" href="oyun.html?id=${encodeURIComponent(o.id)}">Oyunu İncele →</a>`;
     }
   }
 
-  /* Evrim yolculuğu kartları */
+  /* Evrim yolculuğu kartları (XP eşiği + evrim şartı) */
   const yol = document.getElementById("seviyeIzgara");
   if (yol) {
     yol.innerHTML = IV.seviyeler.map((s, k) => `
@@ -50,7 +50,8 @@
         <span class="sira">${k + 1}</span>
         <img src="${IV.rozetUrl(s)}" alt="${IV.temiz(s.ad)}" loading="lazy">
         <h3>${IV.temiz(s.ad)}</h3>
-        <p class="seviye-esik">${s.esik} puan</p>
+        <p class="seviye-esik">${s.esik} XP</p>
+        ${s.sartMetin ? `<p class="seviye-sart">🔒 ${IV.temiz(s.sartMetin)}</p>` : `<p class="seviye-sart">🌊 Başlangıç formu</p>`}
         <p class="seviye-slogan">“${IV.temiz(s.slogan)}”</p>
         <p class="puan-bilgi">${IV.temiz(s.aciklama)}</p>
         <div class="etiketler">${s.ozellikler.map(o => `<span class="etiket durum">${IV.temiz(o)}</span>`).join("")}</div>
